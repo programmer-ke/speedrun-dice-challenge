@@ -21,6 +21,9 @@ contract DiceGame {
   }
 
   function rollTheDice() public payable {
+    console.log("**** in dice game, block number:", block.number);
+    console.log("**** in dice game, dice nonce:", nonce);
+
     if (msg.value < 0.002 ether) {
       revert NotEnoughEther();
     }
