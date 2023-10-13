@@ -79,6 +79,21 @@ const DiceGame: NextPage = () => {
     },
   });
 
+  useScaffoldEventSubscriber({
+    contractName: "RiggedRoll",
+    eventName: "RigAttempt",
+    listener: logs => {
+      logs.map(log => {
+        const { rigger } = log.args;
+
+        if (rigger) {
+          setIsRolling(false);
+        }
+      });
+    },
+  });
+
+
   const { data: winnerHistoryData, isLoading: winnerHistoryLoading } = useScaffoldEventHistory({
     contractName: "DiceGame",
     eventName: "Winner",
